@@ -4,6 +4,10 @@ const defaultNation = {
   economia: 50,
   popularidade: 50,
   liberdade: 50,
+  estabilidade: 50,
+  militar: 50,
+  relint: 50,
+  seguranca: 50,
   lastDecision: null
 };
 
@@ -34,7 +38,51 @@ const dilemmas = [
         effects: { economia: -5, popularidade: +5 }
       }
     ]
+  },
+  {
+    text: "O Ministro dos Negócios Estrangeiros foi acusado de estar num romance com uma diplomata estrangeira.",
+    options: [
+      {
+        text: "Despedir o MNE.",
+        effects: { relint: -3, popularidade: +10, estabilidade: +5 }
+      },
+      {
+        text: "Manter o MNE e negar acusações",
+        effects: { popularidade: -5, estabilidade: -5 }
+      }
+    ]
+  },
+  {
+    text: "Um antigo chefe de governo foi assassinado.",
+    options: [
+      {
+        text: "Legitimar novas despesas nas Forças Armadas com o assassinato.",
+        effects: { relint: -3, militar: +10, estabilidade: -5, popularidade: +2 }
+      },
+      {
+        text: "Condenar atentado.",
+        effects: { popularidade: +5, seguranca: -2 }
+      },
+      {
+        text: "Não comentar.",
+        effects: { popularidade: -15, seguranca: -7, estabilidade: -5 }
+      }
+    ]
+  },
+  {
+    text: "Foi revelado que nas últimas eleições, um delegado do partido do Governo tentou interferir com a contagem na sua mesa de voto.",
+    options: [
+      {
+        text: "Abrir uma investigação formal ao delegado.",
+        effects: { popularidade: +2, estabilidade: -1, liberdade: +4 }
+      },
+      {
+        text: "Negar os factos",
+        effects: { popularidade: -5, estabilidade: -3 }
+      }
+    ]
   }
+  
 ];
 
 // ---------- CARREGAR / GUARDAR ----------
@@ -45,17 +93,6 @@ function loadNation() {
 
 function saveNation(nation) {
   localStorage.setItem("nation", JSON.stringify(nation));
-}
-
-// ---------- TEMPO (1 decisão por dia) ----------
-function canPlay(nation) {
-  if (!nation.lastDecision) return true;
-
-  const last = new Date(nation.lastDecision);
-  const now = new Date();
-  const diff = (now - last) / (1000 * 60 * 60);
-
-  return diff >= 24;
 }
 
 // ---------- INTERFACE ----------
