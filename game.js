@@ -101,6 +101,10 @@ function updateUI(nation) {
   document.getElementById("economia").innerText = nation.economia;
   document.getElementById("popularidade").innerText = nation.popularidade;
   document.getElementById("liberdade").innerText = nation.liberdade;
+  document.getElementById("estabilidade").innerText = nation.estabilidade;
+  document.getElementById("militar").innerText = nation.militar;
+  document.getElementById("relint").innerText = nation.relint;
+  document.getElementById("seguranca").innerText = nation.seguranca;
 }
 
 // ---------- DILEMA ----------
